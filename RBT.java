@@ -129,7 +129,7 @@ public class RBT {
 
     /**
      * helper function for insertion.
-     * this function performs all required tasks to insert a key in the tree and takes care of the BST properties.
+     * this function performs all required tasks to insert a key in the tree and takes care of the RBT properties.
      *
      * @param root Node
      * @param key  int
@@ -142,13 +142,13 @@ public class RBT {
             return (new Node(key));
         }
 
-        // insert key at the correct position according to BST properties
-        // this maybe generates a redAfterRedConflict / violates the BST properties
+        // insert key at the correct position according to RBT properties
+        // this maybe generates a redAfterRedConflict / violates the RBT properties
         // the fixup logic comes after this first insertion
         if (key < root.key) {    // insert into left subtree
             root.left = insertHelper(root.left, key);
             root.left.parent = root;
-            if (root != this.root) {    // if root (of the current insertion) is not the BST root check for redAfterRedConflict
+            if (root != this.root) {    // if root (of the current insertion) is not the RBT root check for redAfterRedConflict
                 if (root.isRed && root.left.isRed) {
                     redAfterRedConflict = true;
                 }
@@ -156,7 +156,7 @@ public class RBT {
         } else {    // insert into right subtree
             root.right = insertHelper(root.right, key);
             root.right.parent = root;
-            if (root != this.root) {    // if root (of the current insertion) is not the BST root check for redAfterRedConflict
+            if (root != this.root) {    // if root (of the current insertion) is not the RBT root check for redAfterRedConflict
                 if (root.isRed && root.right.isRed) {
                     redAfterRedConflict = true;
                 }
@@ -174,7 +174,7 @@ public class RBT {
     }
 
     public void insert(int key) {
-        if (this.root == null) {    // BST insert is called it first time
+        if (this.root == null) {    // RBT insert is called it first time
             this.root = new Node(key);
             this.root.isRed = false;
         } else {
